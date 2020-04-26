@@ -50,16 +50,49 @@ int crear_conexion(char *ip, char* puerto)
 	return socket_cliente;
 }
 
+t_paquete* empaquetar_buffer(t_buffer* buffer, op_code codigo){
+	t_paquete* paquete = malloc( sizeof(t_paquete) );
+	paquete->codigo_operacion = codigo;
+	paquete->buffer = buffer;
+	return paquete;
+}
+
 //TODO
-void enviar_mensaje(char* mensaje, int socket_cliente)
+void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente)
 {
-	t_paquete *paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = MENSAJE;
-	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = strlen(mensaje) + 1;
-	paquete->buffer->stream = mensaje;
+	t_buffer* buffer;
+
+	switch(codigo){
+		case MENSAJE:
+			buffer = mensaje_to_buffer((char*)mensaje);
+			break;
+		case NEW_POKEMON:
+			buffer = new_pokemon_to_buffer((t_new_pokemon*) mensaje);
+			break;
+		case LOCALIZED_POKEMON:
+			buffer = localized_pokemon_to_buffer((t_localized_pokemon*) mensaje);
+			break;
+		case GET_POKEMON:
+			buffer = get_pokemon_to_buffer((t_get_pokemon*) mensaje);
+			break;
+		case APPEARED_POKEMON:
+			buffer = appeared_pokemon_to_buffer((t_appeared_pokemon*) mensaje) ;
+			break;
+		case CATCH_POKEMON:
+			buffer = catch_pokemon_to_buffer((t_catch_pokemon*) mensaje);
+			break;
+		case CAUGHT_POKEMON:
+			buffer = caught_pokemon_to_buffer((t_caught_pokemon*) mensaje);
+			break;
+		default:
+			break;
+	}
+
+	t_paquete* paquete = empaquetar_buffer(buffer,codigo);
+
 	int size_serializado;
 	void* serializado = serializar_paquete(paquete, &size_serializado);
+
 	send(socket_cliente,serializado,size_serializado,0);
 	free(serializado);
 	free(paquete->buffer);

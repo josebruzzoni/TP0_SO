@@ -38,7 +38,11 @@ int main(void)
 	conexion = crear_conexion(ip,puerto);
 
 	//enviar mensaje
-	enviar_mensaje("hola que tal",conexion);
+
+	char* mensaje_a_enviar = string_new();
+	string_append(&mensaje_a_enviar,"hola que tal");
+
+	enviar_mensaje((void*)mensaje_a_enviar,MENSAJE,conexion);
 
 	//recibir mensaje
 	mensaje = recibir_mensaje(conexion);
