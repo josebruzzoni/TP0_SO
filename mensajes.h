@@ -35,7 +35,15 @@ typedef struct{
 } t_new_pokemon;
 
 typedef struct{
+	uint32_t posicionX;
+	uint32_t posicionY;
+}t_posicion;
 
+typedef struct{
+	uint32_t tamanio_nombre;
+	char* nombre;
+	uint32_t cantidad;
+	t_posicion* posiciones;
 } t_localized_pokemon;
 
 typedef struct{
