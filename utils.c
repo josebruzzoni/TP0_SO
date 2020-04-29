@@ -100,18 +100,40 @@ void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente)
 }
 
 //TODO
-char* recibir_mensaje(int socket_cliente)
+void* recibir_mensaje(int socket_cliente)
 {
 	op_code operacion;
 	recv(socket_cliente, &operacion, sizeof(operacion),0);
-	int buffer_size;
-	recv(socket_cliente, &buffer_size, sizeof(buffer_size),0);
-	char *buffer = malloc(sizeof(buffer_size));
-	recv(socket_cliente, buffer, buffer_size,0);
-	if(buffer[buffer_size - 1] != '\0'){
-		printf("WARNING - El buffer recibido no es un string\n");
+	t_buffer* buffer = malloc(sizeof(t_buffer));
+	recv(socket_cliente, &(buffer->size), sizeof(buffer->size),0);
+	recv(socket_cliente, buffer->stream, buffer->size,0);
+	void* mensaje;
+	switch(operacion){
+			case MENSAJE:
+				 mensaje = mensaje_from_buffer(buffer);
+				break;
+			case NEW_POKEMON:
+				 mensaje = new_pokemon_from_buffer(buffer);
+				break;
+			case LOCALIZED_POKEMON:
+				 mensaje = localized_pokemon_from_buffer(buffer);
+				break;
+			case GET_POKEMON:
+				 mensaje = get_pokemon_from_buffer(buffer);
+				break;
+			case APPEARED_POKEMON:
+				 mensaje = appeared_pokemon_from_buffer(buffer) ;
+				break;
+			case CATCH_POKEMON:
+				 mensaje = catch_pokemon_from_buffer(buffer);
+				break;
+			case CAUGHT_POKEMON:
+				 mensaje = caught_pokemon_from_buffer(buffer);
+				break;
+			default:
+				break;
 	}
-	return buffer;
+	return mensaje;
 }
 
 
