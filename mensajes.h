@@ -29,8 +29,7 @@ typedef struct{
 typedef struct{
     uint32_t tamanio_nombre;
     char* nombre;
-    uint32_t posicionX;
-    uint32_t posicionY;
+    t_posicion posicion;
     uint32_t cantidad;
 } t_new_pokemon;
 
@@ -54,15 +53,13 @@ typedef struct{
 typedef struct{
     uint32_t tamanio_nombre;
     char* nombre;
-    uint32_t posicionX;
-    uint32_t posicionY;
+    t_posicion posicion;
 } t_appeared_pokemon;
 
 typedef struct{
     uint32_t tamanio_nombre;
     char* nombre;
-    uint32_t posicionX;
-    uint32_t posicionY;
+    t_posicion posicion;
 } t_catch_pokemon;
 
 typedef struct{
