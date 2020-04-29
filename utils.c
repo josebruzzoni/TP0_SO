@@ -136,7 +136,7 @@ void* recibir_mensaje(int socket_cliente, int* codigo_operacion)
 
 	(*codigo_operacion) = operacion;
 
-	return mensaje;
+	return (void*)mensaje;
 }
 
 

@@ -36,7 +36,7 @@ int main(void)
 
 	//crear conexion
 	conexion = crear_conexion(ip,puerto);
-
+/*
 	//enviar mensaje
 
 	char* mensaje_a_enviar = string_new();
@@ -49,7 +49,7 @@ int main(void)
 
 	//loguear mensaje recibido
 	log_info(logger,"El mensaje recibido es: %s\n",mensaje);
-
+*/
 	terminar_programa(conexion, logger, config);
 
 }
