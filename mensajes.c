@@ -88,6 +88,7 @@ t_localized_pokemon* localized_pokemon_from_buffer(t_buffer* buffer){
 
 	memcpy(&(localized_pokemon->tamanio_nombre), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
+	localized_pokemon->nombre = malloc(localized_pokemon->tamanio_nombre);
 	memcpy(localized_pokemon->nombre, stream, localized_pokemon->tamanio_nombre);
 	stream += localized_pokemon->tamanio_nombre;
 	memcpy(&(localized_pokemon->cantidad), stream, sizeof(uint32_t));
@@ -106,6 +107,8 @@ t_localized_pokemon* localized_pokemon_from_buffer(t_buffer* buffer){
 
 t_buffer* get_pokemon_to_buffer(t_get_pokemon* get_pokemon){
 	t_buffer* buffer = malloc( sizeof(t_buffer) );
+
+
 	return buffer;
 }
 
