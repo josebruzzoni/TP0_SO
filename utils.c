@@ -100,7 +100,7 @@ void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente)
 }
 
 //TODO
-void* recibir_mensaje(int socket_cliente)
+void* recibir_mensaje(int socket_cliente, int* codigo_operacion)
 {
 	op_code operacion;
 	recv(socket_cliente, &operacion, sizeof(operacion),0);
@@ -133,6 +133,9 @@ void* recibir_mensaje(int socket_cliente)
 			default:
 				break;
 	}
+
+	(*codigo_operacion) = operacion;
+
 	return mensaje;
 }
 

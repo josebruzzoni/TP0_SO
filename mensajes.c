@@ -39,8 +39,7 @@ t_new_pokemon* new_pokemon_from_buffer(t_buffer* buffer){
 	memcpy(&(new_pokemon->tamanio_nombre), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
 	new_pokemon->nombre = malloc(new_pokemon->tamanio_nombre);
-	memcpy(&(new_pokemon->nombre), stream, new_pokemon->tamanio_nombre);
-
+	memcpy(new_pokemon->nombre, stream, new_pokemon->tamanio_nombre);
 	stream += (new_pokemon->tamanio_nombre);
 	memcpy(&(new_pokemon->posicionX), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
