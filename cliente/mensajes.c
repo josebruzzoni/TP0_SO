@@ -18,9 +18,9 @@ t_buffer* new_pokemon_to_buffer(t_new_pokemon* new_pokemon){
 	offset += sizeof(uint32_t);
 	memcpy(stream + offset, new_pokemon->nombre, new_pokemon->tamanio_nombre);
 	offset += new_pokemon->tamanio_nombre;
-	memcpy(stream + offset, &(new_pokemon->posicion->posicionX), sizeof(uint32_t));
+	memcpy(stream + offset, &(new_pokemon->posicion.posicionX), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-	memcpy(stream + offset, &(new_pokemon->posicion->posicionY), sizeof(uint32_t));
+	memcpy(stream + offset, &(new_pokemon->posicion.posicionY), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 	memcpy(stream + offset, &(new_pokemon->cantidad), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
@@ -41,9 +41,9 @@ t_new_pokemon* new_pokemon_from_buffer(t_buffer* buffer){
 	new_pokemon->nombre = malloc(new_pokemon->tamanio_nombre);
 	memcpy(new_pokemon->nombre, stream, new_pokemon->tamanio_nombre);
 	stream += (new_pokemon->tamanio_nombre);
-	memcpy(&(new_pokemon->posicion->posicionX), stream, sizeof(uint32_t));
+	memcpy(&(new_pokemon->posicion.posicionX), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
-	memcpy(&(new_pokemon->posicion->posicionY), stream, sizeof(uint32_t));
+	memcpy(&(new_pokemon->posicion.posicionY), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
 	memcpy(&(new_pokemon->cantidad), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
@@ -70,9 +70,9 @@ t_buffer* localized_pokemon_to_buffer(t_localized_pokemon* localized_pokemon){
 
 	//Por cada posicion segun la cantidad, hago memcpy de x e y.
 	for(int i = 0 ; i < localized_pokemon->cantidad ; i++){
-		memcpy(stream + offset, *(localized_pokemon->posiciones + i)->posicionX, sizeof(uint32_t));
+		memcpy(stream + offset, &(localized_pokemon->posiciones[i].posicionX), sizeof(uint32_t));
 		offset += sizeof(uint32_t);
-		memcpy(stream + offset, *(localized_pokemon->posiciones + i)->posicionY, sizeof(uint32_t));
+		memcpy(stream + offset, &(localized_pokemon->posiciones[i].posicionY),  sizeof(uint32_t));
 		offset += sizeof(uint32_t);
 	}
 
@@ -96,9 +96,9 @@ t_localized_pokemon* localized_pokemon_from_buffer(t_buffer* buffer){
 
 	localized_pokemon->posiciones = malloc(sizeof(t_posicion) * localized_pokemon->cantidad);
 	for(int i = 0 ; i < localized_pokemon->cantidad ; i++){
-		memcpy(*(localized_pokemon->posiciones + i)->posicionX, stream, sizeof(uint32_t));
+		memcpy(&(localized_pokemon->posiciones[i].posicionX) , stream, sizeof(uint32_t));
 		stream += sizeof(uint32_t);
-		memcpy(*(localized_pokemon->posiciones + i)->posicionY, stream, sizeof(uint32_t));
+		memcpy(&(localized_pokemon->posiciones[i].posicionX), stream, sizeof(uint32_t));
 		stream += sizeof(uint32_t);
 	}
 
@@ -146,9 +146,9 @@ t_buffer* appeared_pokemon_to_buffer(t_appeared_pokemon* appeared_pokemon){
 	offset += sizeof(uint32_t);
 	memcpy(stream + offset, appeared_pokemon->nombre, appeared_pokemon->tamanio_nombre);
 	offset += appeared_pokemon->tamanio_nombre;
-	memcpy(stream + offset, &(appeared_pokemon->posicion->posicionX), sizeof(uint32_t));
+	memcpy(stream + offset, &(appeared_pokemon->posicion.posicionX), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-	memcpy(stream + offset, &(appeared_pokemon->posicion->posicionY), sizeof(uint32_t));
+	memcpy(stream + offset, &(appeared_pokemon->posicion.posicionY), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 
 	buffer->stream = stream;
@@ -165,9 +165,9 @@ t_appeared_pokemon* appeared_pokemon_from_buffer(t_buffer* buffer){
 	appeared_pokemon->nombre = malloc(appeared_pokemon->tamanio_nombre);
 	memcpy(appeared_pokemon->nombre, stream, appeared_pokemon->tamanio_nombre);
 	stream += appeared_pokemon->tamanio_nombre;
-	memcpy(&(appeared_pokemon->posicion->posicionX), stream, sizeof(uint32_t));
+	memcpy(&(appeared_pokemon->posicion.posicionX), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
-	memcpy(&(appeared_pokemon->posicion->posicionY), stream, sizeof(uint32_t));
+	memcpy(&(appeared_pokemon->posicion.posicionY), stream, sizeof(uint32_t));
 	stream += sizeof(uint32_t);
 
 	return appeared_pokemon;

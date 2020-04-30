@@ -17,7 +17,7 @@
 
 int crear_conexion(char* ip, char* puerto);
 void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente);
-char* recibir_mensaje(int socket_cliente);
+void* recibir_mensaje(int socket_cliente, int* codigo_operacion);
 void eliminar_paquete(t_paquete* paquete);
 void liberar_conexion(int socket_cliente);
 void* serializar_paquete(t_paquete* paquete, int *bytes);
