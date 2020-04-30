@@ -80,6 +80,6 @@ void probarLocalizedPokemon(){
 }
 
 int main(void){
-	probarLocalizedPokemon();
+	probarCatchPokemon();
 	return 0;
 }

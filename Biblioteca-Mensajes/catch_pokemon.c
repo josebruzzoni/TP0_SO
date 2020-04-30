@@ -24,9 +24,9 @@ t_buffer* catch_pokemon_to_buffer(t_catch_pokemon* catch_pokemon){
 	offset += sizeof(uint32_t);
 	memcpy(stream + offset, catch_pokemon->nombre, catch_pokemon->tamanio_nombre);
 	offset += catch_pokemon->tamanio_nombre;
-	memcpy(stream + offset, &(catch_pokemon->posicion->posicionX), sizeof(uint32_t));
+	memcpy(stream + offset, &(catch_pokemon->posicion.posicionX), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-	memcpy(stream + offset, &(catch_pokemon->posicion->posicionY), sizeof(uint32_t));
+	memcpy(stream + offset, &(catch_pokemon->posicion.posicionY), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 
 	buffer->stream = stream;
