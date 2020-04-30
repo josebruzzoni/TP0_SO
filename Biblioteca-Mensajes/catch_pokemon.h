@@ -1,4 +1,4 @@
-#ifndef CATHC_POKEMON_H
+#ifndef CATCH_POKEMON_H
 #define CATCH_POKEMON_H
 
 #include "mensajes.h"
