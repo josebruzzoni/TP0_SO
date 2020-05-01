@@ -32,14 +32,12 @@ typedef struct{
 	uint32_t posicionY;
 }t_posicion;
 
-/*
+
 // para envio de mensajes
 t_buffer* mensaje_to_buffer(char* mensaje);
 
 //para recibir mensajes
 char* mensaje_from_buffer(t_buffer* buffer);
-t_localized_pokemon* localized_pokemon_from_buffer(t_buffer* buffer);*/
-
 
 
 #endif 
