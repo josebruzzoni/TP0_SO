@@ -6,24 +6,17 @@
  */
 
 #include "tp0.h"
+#include <mensajes/new_pokemon.h>
+#include <mensajes/mensajes.h>
 
 int main(void)
 {
 	/*---------------------------------------------------PARTE 2-------------------------------------------------------------*/
-	/*int conexion;
+	int conexion;
 	char* ip;
 	char* puerto;
-	char* mensaje;*/
+	void* mensaje;
 
-	t_new_pokemon* pokem = new_pokemon_create("asdasd", 1, 2, 3);
-	new_pokemon_mostrar(pokem);
-
-	t_buffer* buf = new_pokemon_to_buffer(pokem);
-	t_new_pokemon* po = new_pokemon_from_buffer(buf);
-
-	new_pokemon_mostrar(po);
-
-	/*
 
 	t_log* logger;
 	t_config* config;
@@ -46,22 +39,68 @@ int main(void)
 	conexion = crear_conexion(ip,puerto);
 
 	//enviar mensaje
+	t_new_pokemon * new_pokemon = new_pokemon_create("Pikachu",4,3,2);
 
-	char* mensaje_a_enviar = string_new();
-	string_append(&mensaje_a_enviar,"hola que tal");
+	enviar_mensaje((void*)new_pokemon,NEW_POKEMON,conexion);
 
-	enviar_mensaje((void*)mensaje_a_enviar,MENSAJE,conexion);
 
 	//recibir mensaje
-	mensaje = recibir_mensaje(conexion);
+	op_code operacion;
+	mensaje = recibir_mensaje(conexion, &operacion);
 
-	//loguear mensaje recibido
-	log_info(logger,"El mensaje recibido es: %s\n",mensaje);
+	switch(operacion){
 
-	terminar_programa(conexion, logger, config);*/
+			case MENSAJE:
+				char* cadena = (char*)mensaje;
+				log_info(logger,"El mensaje recibido es: %s\n", cadena);
+				break;
+			case NEW_POKEMON:
+				t_new_pokemon* pokemon = (t_new_pokemon*) mensaje;
+				log_info(logger,"El nombre es: %s\n",pokemon->nombre);
+				log_info(logger,"El tamanio del nombre es: %d\n",pokemon->tamanio_nombre);
+				log_info(logger,"La posicion en x es: %d\n",pokemon->posicion.posicionX);
+				log_info(logger,"La posicion en y es: %d\n",pokemon->posicion.posicionY);
+				log_info(logger,"La cantidad que hay es: %d\n",pokemon->cantidad);
+				break;
+			case LOCALIZED_POKEMON:
+				t_localized_pokemon* pokemonLocalizado = (t_localized_pokemon*) mensaje;
+				log_info(logger,"El nombre es: %s\n", pokemonLocalizado->nombre);
+				log_info(logger,"El tamanio del nombre es: %d\n",pokemonLocalizado->tamanio_nombre);
+				log_info(logger,"La cantidad que hay es: %d\n",pokemonLocalizado->cantidadPos);
+				log_info(logger,"Las posiciones son: %d\n",pokemonLocalizado->posiciones);
+				break;
+			case GET_POKEMON:
+				t_get_pokemon* pokemonConseguir = (t_get_pokemon*) mensaje;
+				log_info(logger,"El nombre es: %s\n", pokemonConseguir->nombre);
+				log_info(logger,"El tamanio del nombre es: %d\n:",pokemonConseguir->tamanio_nombre);
+				break;
+			case APPEARED_POKEMON:
+				t_appeared_pokemon* pokemonAparecido = (t_appeared_pokemon*) mensaje;
+				log_info(logger,"El nombre es: %s\n",pokemonAparecido->nombre);
+				log_info(logger,"El tamanio del nombre es: %d\n",pokemonAparecido->tamanio_nombre);
+				log_info(logger,"La posicion en x es: %d\n",pokemonAparecido->posicion.posicionX);
+				log_info(logger,"La posicion en y es: %d\n",pokemonAparecido->posicion.posicionY);
+				break;
+			case CATCH_POKEMON:
+				t_catch_pokemon* atraparPokemon = (t_catch_pokemon*) mensaje;
+				log_info(logger,"El nombre es: %s\n",atraparPokemon->nombre);
+				log_info(logger,"El tamanio del nombre es: %d\n",atraparPokemon->tamanio_nombre);
+				log_info(logger,"La posicion en x es: %d\n",atraparPokemon->posicion.posicionX);
+				log_info(logger,"La posicion en y es: %d\n",atraparPokemon->posicion.posicionY);
+				break;
+			case CAUGHT_POKEMON:
+				t_caught_pokemon* pokemonAtrapado = (t_caught_pokemon*) mensaje;
+				log_info(logger,"EL pokemon fue atrapado: %d\n", pokemonAtrapado->atrapado);
+				break;
+			default:
+				break;
+		}
+
+
+	terminar_programa(conexion, logger, config);
 
 }
-/*
+
 //TODO
 t_log* iniciar_logger(void)
 {
@@ -105,4 +144,5 @@ void terminar_programa(int conexion, t_log* logger, t_config* config)
 		config_destroy(config);
 	}
 
-}*/
+}
+

@@ -100,7 +100,7 @@ void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente)
 }
 
 //TODO
-void* recibir_mensaje(int socket_cliente, int* codigo_operacion)
+void* recibir_mensaje(int socket_cliente, op_code* codigo_operacion)
 {
 	op_code operacion;
 	recv(socket_cliente, &operacion, sizeof(operacion),0);
