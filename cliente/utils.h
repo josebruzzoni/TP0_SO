@@ -13,7 +13,14 @@
 #include<unistd.h>
 #include<sys/socket.h>
 #include<netdb.h>
-#include "mensajes.h"
+
+#include<mensajes/mensajes.h>
+#include<mensajes/appeared_pokemon.h>
+#include<mensajes/catch_pokemon.h>
+#include<mensajes/caught_pokemon.h>
+#include<mensajes/get_pokemon.h>
+#include<mensajes/localized_pokemon.h>
+#include<mensajes/new_pokemon.h>
 
 int crear_conexion(char* ip, char* puerto);
 void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente);

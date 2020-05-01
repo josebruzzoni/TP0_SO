@@ -10,10 +10,20 @@
 int main(void)
 {
 	/*---------------------------------------------------PARTE 2-------------------------------------------------------------*/
-	int conexion;
+	/*int conexion;
 	char* ip;
 	char* puerto;
-	char* mensaje;
+	char* mensaje;*/
+
+	t_new_pokemon* pokem = new_pokemon_create("asdasd", 1, 2, 3);
+	new_pokemon_mostrar(pokem);
+
+	t_buffer* buf = new_pokemon_to_buffer(pokem);
+	t_new_pokemon* po = new_pokemon_from_buffer(buf);
+
+	new_pokemon_mostrar(po);
+
+	/*
 
 	t_log* logger;
 	t_config* config;
@@ -29,14 +39,12 @@ int main(void)
 
 	log_info(logger, "Lei la ip %s y el puerto %s\n",ip,puerto);
 
-	/*---------------------------------------------------PARTE 3-------------------------------------------------------------*/
-
-	//antes de continuar, tenemos que asegurarnos que el servidor esté corriendo porque
+//antes de continuar, tenemos que asegurarnos que el servidor esté corriendo porque
 	//lo necesitaremos para lo que sigue.
 
 	//crear conexion
 	conexion = crear_conexion(ip,puerto);
-/*
+
 	//enviar mensaje
 
 	char* mensaje_a_enviar = string_new();
@@ -49,11 +57,11 @@ int main(void)
 
 	//loguear mensaje recibido
 	log_info(logger,"El mensaje recibido es: %s\n",mensaje);
-*/
-	terminar_programa(conexion, logger, config);
+
+	terminar_programa(conexion, logger, config);*/
 
 }
-
+/*
 //TODO
 t_log* iniciar_logger(void)
 {
@@ -84,7 +92,7 @@ void terminar_programa(int conexion, t_log* logger, t_config* config)
 	log_destroy(logger);
 	config_destroy(config);
 	liberar_conexion(conexion);
-	/*
+
 	//Y por ultimo, para cerrar, hay que liberar lo que utilizamos (conexion, log y config) con las funciones de las commons y del TP mencionadas en el enunciado
 	log_info(logger, "finalizando programa...");
 	liberar_conexion(conexion);
@@ -96,5 +104,5 @@ void terminar_programa(int conexion, t_log* logger, t_config* config)
 	{
 		config_destroy(config);
 	}
-	*/
-}
+
+}*/
