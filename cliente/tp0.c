@@ -1,15 +1,7 @@
- /*
- * main.c
- *
- *  Created on: 28 feb. 2019
- *      Author: utnso
- */
-
 #include "tp0.h"
 
 int main(void)
 {
-	/*---------------------------------------------------PARTE 2-------------------------------------------------------------*/
 	int conexion;
 	char* ip;
 	char* puerto;
@@ -28,21 +20,22 @@ int main(void)
 
 	log_info(logger, "Lei la ip %s y el puerto %s\n",ip,puerto);
 
-	//crear conexion
 	conexion = crear_conexion(ip,puerto);
 	log_info(logger, "Cree una conexion con el ip: %s en el puerto %s\n",ip,puerto);
 
-	//creo el mensaje new_pokemon
-	char men[] = "Soy un log";
-	enviar_mensaje((void*)men,MENSAJE,conexion);
-
+	t_new_pokemon* pikachu_enviado = new_pokemon_create("pikachu",2,3,5);
+	enviar_mensaje((void*)pikachu_enviado,NEW_POKEMON,conexion);
 	log_info(logger,"Envie el mensaje\n");
 
-	//recibir mensaje
 	op_code operacion;
-	char* mensaje = (char*) recibir_mensaje(conexion, &operacion);
-
-	log_info(logger, "El mensaje es: %s\n", mensaje);
+	t_new_pokemon* pikachu_recibido = (t_new_pokemon*) recibir_mensaje(conexion, &operacion);
+	if(operacion == NEW_POKEMON){
+		log_info(logger,"Llego un mensaje - New Pokemon\n");
+		log_info(logger,"Su nombre es %s\n", pikachu_recibido->nombre);
+		log_info(logger,"Su nombre tiene %d  letras\n",pikachu_recibido->tamanio_nombre);
+		log_info(logger,"Estan en (x,y) = (%d,%d)\n",pikachu_recibido->posicion.posicionX,pikachu_recibido->posicion.posicionY);
+		log_info(logger,"En esas coordenadas hay %d cantidad\n",pikachu_recibido->cantidad);
+	}
 
 	log_info(logger,"Termine el programa correctamente\n");
 	terminar_programa(conexion, logger, config);
