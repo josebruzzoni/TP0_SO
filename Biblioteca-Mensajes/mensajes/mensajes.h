@@ -8,7 +8,7 @@
 
 typedef enum
 {
-	NEW_POKEMON,
+	NEW_POKEMON = 1,
     LOCALIZED_POKEMON,
     GET_POKEMON,
     APPEARED_POKEMON,
@@ -30,6 +30,6 @@ typedef struct{
 void* serializar_paquete(t_paquete* paquete, int *bytes);
 t_paquete* empaquetar_buffer(t_buffer* buffer, op_code codigo);
 void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente);
-void* recibir_mensaje(int socket_cliente, int* codigo_operacion);
+void* recibir_mensaje(int socket_cliente, op_code* codigo_operacion);
 
 #endif 

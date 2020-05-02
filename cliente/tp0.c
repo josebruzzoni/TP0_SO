@@ -13,8 +13,6 @@ int main(void)
 	int conexion;
 	char* ip;
 	char* puerto;
-	void* mensaje;
-
 
 	t_log* logger;
 	t_config* config;
@@ -35,74 +33,19 @@ int main(void)
 	log_info(logger, "Cree una conexion con el ip: %s en el puerto %s\n",ip,puerto);
 
 	//creo el mensaje new_pokemon
-	t_new_pokemon * new_pokemon = new_pokemon_create("Pikachu",4,3,2);
-	log_info(logger,"Creo el mensaje new_pokemon para enviarlo\n");
+	char men[] = "Soy un log";
+	enviar_mensaje((void*)men,MENSAJE,conexion);
 
-	//enviar mensaje
-	enviar_mensaje((void*)new_pokemon,NEW_POKEMON,conexion);
-	log_info(logger,"Envie el new_pokemon\n");
+	log_info(logger,"Envie el mensaje\n");
 
 	//recibir mensaje
-	int operacion;
-	mensaje = recibir_mensaje(conexion, &operacion);
+	op_code operacion;
+	char* mensaje = (char*) recibir_mensaje(conexion, &operacion);
 
-	log_info(logger, "El nombre es: %s\n", ((t_new_pokemon*)mensaje)->nombre);
-	log_info(logger, "El tamanio del nombre es: %d\n", ((t_new_pokemon*)mensaje)->tamanio_nombre);
-	log_info(logger, "La posicion en x es: %d\n", ((t_new_pokemon*)mensaje)->posicion.posicionX);
-	log_info(logger, "La posicion en y es: %d\n", ((t_new_pokemon*)mensaje)->posicion.posicionY);
-	log_info(logger, "La cantidad que hay es: %d\n", ((t_new_pokemon*)mensaje)->cantidad);
+	log_info(logger, "El mensaje es: %s\n", mensaje);
 
-/*
-	switch(operacion){
-
-			case MENSAJE:
-				char* cadena = (char*)mensaje;
-				log_info(logger,"El mensaje recibido es: %s\n", cadena);
-				break;
-			case NEW_POKEMON:
-				t_new_pokemon* pokemon = (t_new_pokemon*) mensaje;
-				log_info(logger,"El nombre es: %s\n",pokemon->nombre);
-				log_info(logger,"El tamanio del nombre es: %d\n",pokemon->tamanio_nombre);
-				log_info(logger,"La posicion en x es: %d\n",pokemon->posicion.posicionX);
-				log_info(logger,"La posicion en y es: %d\n",pokemon->posicion.posicionY);
-				log_info(logger,"La cantidad que hay es: %d\n",pokemon->cantidad);
-				break;
-			case LOCALIZED_POKEMON:
-				t_localized_pokemon* pokemonLocalizado = (t_localized_pokemon*) mensaje;
-				log_info(logger,"El nombre es: %s\n", pokemonLocalizado->nombre);
-				log_info(logger,"El tamanio del nombre es: %d\n",pokemonLocalizado->tamanio_nombre);
-				log_info(logger,"La cantidad que hay es: %d\n",pokemonLocalizado->cantidadPos);
-				log_info(logger,"Las posiciones son: %d\n",pokemonLocalizado->posiciones);
-				break;
-			case GET_POKEMON:
-				t_get_pokemon* pokemonConseguir = (t_get_pokemon*) mensaje;
-				log_info(logger,"El nombre es: %s\n", pokemonConseguir->nombre);
-				log_info(logger,"El tamanio del nombre es: %d\n:",pokemonConseguir->tamanio_nombre);
-				break;
-			case APPEARED_POKEMON:
-				t_appeared_pokemon* pokemonAparecido = (t_appeared_pokemon*) mensaje;
-				log_info(logger,"El nombre es: %s\n",pokemonAparecido->nombre);
-				log_info(logger,"El tamanio del nombre es: %d\n",pokemonAparecido->tamanio_nombre);
-				log_info(logger,"La posicion en x es: %d\n",pokemonAparecido->posicion.posicionX);
-				log_info(logger,"La posicion en y es: %d\n",pokemonAparecido->posicion.posicionY);
-				break;
-			case CATCH_POKEMON:
-				t_catch_pokemon* atraparPokemon = (t_catch_pokemon*) mensaje;
-				log_info(logger,"El nombre es: %s\n",atraparPokemon->nombre);
-				log_info(logger,"El tamanio del nombre es: %d\n",atraparPokemon->tamanio_nombre);
-				log_info(logger,"La posicion en x es: %d\n",atraparPokemon->posicion.posicionX);
-				log_info(logger,"La posicion en y es: %d\n",atraparPokemon->posicion.posicionY);
-				break;
-			case CAUGHT_POKEMON:
-				t_caught_pokemon* pokemonAtrapado = (t_caught_pokemon*) mensaje;
-				log_info(logger,"EL pokemon fue atrapado: %d\n", pokemonAtrapado->atrapado);
-				break;
-			default:
-				break;
-		}*/
-
-	terminar_programa(conexion, logger, config);
 	log_info(logger,"Termine el programa correctamente\n");
+	terminar_programa(conexion, logger, config);
 }
 
 //TODO
@@ -132,12 +75,6 @@ t_config* leer_config(void)
 //TODO
 void terminar_programa(int conexion, t_log* logger, t_config* config)
 {
-	log_destroy(logger);
-	config_destroy(config);
-	liberar_conexion(conexion);
-
-	//Y por ultimo, para cerrar, hay que liberar lo que utilizamos (conexion, log y config) con las funciones de las commons y del TP mencionadas en el enunciado
-	log_info(logger, "finalizando programa...");
 	liberar_conexion(conexion);
 	if(logger != NULL)
 	{

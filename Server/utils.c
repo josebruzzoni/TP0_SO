@@ -55,7 +55,7 @@ void esperar_cliente(int socket_servidor)
 
 void serve_client(int* socket)
 {
-	int cod_op;
+	op_code cod_op;
 	void* mensaje = recibir_mensaje(*socket,&cod_op);
 	enviar_mensaje(mensaje,cod_op,*socket);
 }

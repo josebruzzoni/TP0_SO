@@ -78,14 +78,17 @@ void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente)
 	free(paquete);
 }
 
-//TODO
-void* recibir_mensaje(int socket_cliente, int* codigo_operacion)
+void* recibir_mensaje(int socket_cliente, op_code* codigo_operacion)
 {
 	op_code operacion;
 	recv(socket_cliente, &operacion, sizeof(operacion),0);
+
 	t_buffer* buffer = malloc(sizeof(t_buffer));
 	recv(socket_cliente, &(buffer->size), sizeof(buffer->size),0);
+
+	buffer->stream = malloc(buffer->size);
 	recv(socket_cliente, buffer->stream, buffer->size,0);
+
 	void* mensaje;
 	switch(operacion){
 			case MENSAJE:
