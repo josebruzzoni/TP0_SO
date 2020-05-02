@@ -27,17 +27,9 @@ typedef struct{
 	t_buffer* buffer;
 } t_paquete;
 
-typedef struct{
-	uint32_t posicionX;
-	uint32_t posicionY;
-}t_posicion;
-
-
-// para envio de mensajes
-t_buffer* mensaje_to_buffer(char* mensaje);
-
-//para recibir mensajes
-char* mensaje_from_buffer(t_buffer* buffer);
-
+void* serializar_paquete(t_paquete* paquete, int *bytes);
+t_paquete* empaquetar_buffer(t_buffer* buffer, op_code codigo);
+void enviar_mensaje(void* mensaje,op_code codigo, int socket_cliente);
+void* recibir_mensaje(int socket_cliente, int* codigo_operacion);
 
 #endif 

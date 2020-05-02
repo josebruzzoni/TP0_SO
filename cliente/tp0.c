@@ -6,8 +6,6 @@
  */
 
 #include "tp0.h"
-#include <mensajes/new_pokemon.h>
-#include <mensajes/mensajes.h>
 
 int main(void)
 {
@@ -32,22 +30,29 @@ int main(void)
 
 	log_info(logger, "Lei la ip %s y el puerto %s\n",ip,puerto);
 
-//antes de continuar, tenemos que asegurarnos que el servidor esté corriendo porque
-	//lo necesitaremos para lo que sigue.
-
 	//crear conexion
 	conexion = crear_conexion(ip,puerto);
+	log_info(logger, "Cree una conexion con el ip: %s en el puerto %s\n",ip,puerto);
+
+	//creo el mensaje new_pokemon
+	t_new_pokemon * new_pokemon = new_pokemon_create("Pikachu",4,3,2);
+	log_info(logger,"Creo el mensaje new_pokemon para enviarlo\n");
 
 	//enviar mensaje
-	t_new_pokemon * new_pokemon = new_pokemon_create("Pikachu",4,3,2);
-
 	enviar_mensaje((void*)new_pokemon,NEW_POKEMON,conexion);
-
+	log_info(logger,"Envie el new_pokemon\n");
 
 	//recibir mensaje
-	op_code operacion;
+	int operacion;
 	mensaje = recibir_mensaje(conexion, &operacion);
 
+	log_info(logger, "El nombre es: %s\n", ((t_new_pokemon*)mensaje)->nombre);
+	log_info(logger, "El tamanio del nombre es: %d\n", ((t_new_pokemon*)mensaje)->tamanio_nombre);
+	log_info(logger, "La posicion en x es: %d\n", ((t_new_pokemon*)mensaje)->posicion.posicionX);
+	log_info(logger, "La posicion en y es: %d\n", ((t_new_pokemon*)mensaje)->posicion.posicionY);
+	log_info(logger, "La cantidad que hay es: %d\n", ((t_new_pokemon*)mensaje)->cantidad);
+
+/*
 	switch(operacion){
 
 			case MENSAJE:
@@ -94,11 +99,10 @@ int main(void)
 				break;
 			default:
 				break;
-		}
-
+		}*/
 
 	terminar_programa(conexion, logger, config);
-
+	log_info(logger,"Termine el programa correctamente\n");
 }
 
 //TODO
@@ -145,4 +149,3 @@ void terminar_programa(int conexion, t_log* logger, t_config* config)
 	}
 
 }
-

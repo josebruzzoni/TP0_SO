@@ -2,6 +2,7 @@
 #define CATCH_POKEMON_H
 
 #include "mensajes.h"
+#include "posiciones.h"
 
 typedef struct{
     uint32_t tamanio_nombre;

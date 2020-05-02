@@ -99,3 +99,23 @@
 
 [INFO] 23:01:05:943 tp0/(5411:5411): El mensaje recibido es: hola que tal
 
+[INFO] 20:55:39:214 tp0/(4949:4949): soy un log
+[INFO] 20:55:39:215 tp0/(4949:4949): creando config...
+[INFO] 20:55:39:219 tp0/(4949:4949): Lei la ip 127.0.0.1 y el puerto 4444
+
+[INFO] 20:55:39:219 tp0/(4949:4949): Cree una conexion con el ip: 127.0.0.1 en el puerto 4444
+
+[INFO] 20:55:39:219 tp0/(4949:4949): Creo el mensaje new_pokemon para enviarlo
+
+[INFO] 20:55:39:219 tp0/(4949:4949): Envie el new_pokemon
+
+[INFO] 20:57:08:438 tp0/(4983:4983): soy un log
+[INFO] 20:57:08:438 tp0/(4983:4983): creando config...
+[INFO] 20:57:08:441 tp0/(4983:4983): Lei la ip 127.0.0.1 y el puerto 4444
+
+[INFO] 20:57:08:441 tp0/(4983:4983): Cree una conexion con el ip: 127.0.0.1 en el puerto 4444
+
+[INFO] 20:57:08:441 tp0/(4983:4983): Creo el mensaje new_pokemon para enviarlo
+
+[INFO] 20:57:08:441 tp0/(4983:4983): Envie el new_pokemon
+
