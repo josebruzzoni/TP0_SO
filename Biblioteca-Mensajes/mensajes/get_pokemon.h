@@ -36,6 +36,11 @@ get_pokemon_mostrar dado un mensaje get pokemon este metodo lo imprime por conso
 void get_pokemon_mostrar(t_get_pokemon* get_pokemon);
 
 /*
+get_pokemon_to_string convierte en un string al mensaje get_pokemon
+*/
+char* get_pokemon_to_string(t_get_pokemon* get_pokemon);
+
+/*
 get_pokemon_destroy libera la memoria utilizada para crear el mensaje get pokemon
 */
 void get_pokemon_destroy(t_get_pokemon* get_pokemon);

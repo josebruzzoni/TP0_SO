@@ -35,6 +35,11 @@ caught_pokemon_mostrar dado un mensaje caught pokemon este metodo lo imprime por
 void caught_pokemon_mostrar(t_caught_pokemon* caught_pokemon);
 
 /*
+caught_pokemon_to_string convierte un mensaje caught_pokemon en un string
+*/
+char* caught_pokemon_to_string(t_caught_pokemon* caught_pokemon);
+
+/*
 caught_pokemon_destroy libera la memoria utilizada para crear el mensaje caught pokemon
 */
 void caught_pokemon_destroy(t_caught_pokemon* caught_pokemon);

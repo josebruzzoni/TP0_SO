@@ -40,6 +40,11 @@ new_pokemon_mostrar dado un mensaje new pokemon este metodo lo imprime por conso
 void new_pokemon_mostrar(t_new_pokemon* new_pokemon);
 
 /*
+new_pokemon_to_string convierte el mensaje new_pokemon en un string
+*/
+char* new_pokemon_to_string(t_new_pokemon* new_pokemon);
+
+/*
 new_pokemon_destroy libera la memoria utilizada para crear el mensaje new pokemon
 */
 void new_pokemon_destroy(t_new_pokemon* new_pokemon);

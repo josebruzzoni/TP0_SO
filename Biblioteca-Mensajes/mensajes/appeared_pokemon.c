@@ -1,4 +1,5 @@
 #include "appeared_pokemon.h"
+#include <commons/string.h>
 
 t_appeared_pokemon* appeared_pokemon_create(char* nombre, uint32_t posX, uint32_t posY){
 	t_appeared_pokemon* appeared_pokemon = malloc( sizeof(t_appeared_pokemon) );
@@ -58,6 +59,10 @@ void appeared_pokemon_mostrar(t_appeared_pokemon* appeared_pokemon){
 	printf("Posicion x: %d\n",appeared_pokemon->posicion.posicionX);
 	printf("Posicion y: %d\n",appeared_pokemon->posicion.posicionY);
 	puts("------------");
+}
+
+char* appeared_pokemon_to_string(t_appeared_pokemon* appeared_pokemon){
+	return string_from_format("Mensaje - Appeared Pokemon:\nNombre: %s\nTamanio del nombre: %d\nPosicion x: %d\nPosicion y: %d\n------------",appeared_pokemon->nombre,appeared_pokemon->tamanio_nombre,appeared_pokemon->posicion.posicionX,appeared_pokemon->posicion.posicionY);
 }
 
 void appeared_pokemon_destroy(t_appeared_pokemon* appeared_pokemon){

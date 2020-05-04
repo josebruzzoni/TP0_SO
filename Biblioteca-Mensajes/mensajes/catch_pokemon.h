@@ -38,6 +38,11 @@ catch_pokemon_mostrar dado un mensaje catch pokemon este metodo lo imprime por c
 void catch_pokemon_mostrar(t_catch_pokemon* catch_pokemon);
 
 /*
+catch_pokemon_to_string convierte un mensaje catch pokemon en un string
+*/
+char* catch_pokemon_to_string(t_catch_pokemon*catch_pokemon);
+
+/*
 catch_pokemon_destroy libera la memoria utilizada para crear el mensaje catch pokemon
 */
 void catch_pokemon_destroy(t_catch_pokemon* catch_pokemon);

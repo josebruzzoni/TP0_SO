@@ -12,7 +12,7 @@ create-dirs:
 	mkdir -p build/mensajes
 
 build/libmensajes.so: create-dirs $(OBJS)
-	$(CC) -shared -o "build/libmensajes.so" $(OBJS)
+	$(CC) -shared -o "build/libmensajes.so" $(OBJS) -lcommons
 
 build/mensajes/%.o: mensajes/%.c
 	$(CC) -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"

@@ -42,6 +42,11 @@ localized_pokemon_mostrar dado un mensaje localized pokemon este metodo lo impri
 void localized_pokemon_mostrar(t_localized_pokemon* localized_pokemon);
 
 /*
+localized_pokemon_to_string convierte el mensaje localized_pokemon en un string
+*/
+char* localized_pokemon_to_string(t_localized_pokemon* localized_pokemon);
+
+/*
 localized_pokemon_destroy libera la memoria utilizada para crear el mensaje localized pokemon
 */
 void localized_pokemon_destroy(t_localized_pokemon* localized_pokemon);

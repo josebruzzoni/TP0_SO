@@ -1,4 +1,5 @@
 #include "new_pokemon.h"
+#include <commons/string.h>
 
 t_new_pokemon* new_pokemon_create(char* nombre, uint32_t posX, uint32_t posY, uint32_t cantidad){
 	t_new_pokemon* new_pokemon = malloc( sizeof(t_new_pokemon) );
@@ -65,6 +66,10 @@ void new_pokemon_mostrar(t_new_pokemon* new_pokemon){
 	printf("Posicion y: %d\n",new_pokemon->posicion.posicionY);
 	printf("Cantidad: %d\n",new_pokemon->cantidad);
 	puts("------------");
+}
+
+char* new_pokemon_to_string(t_new_pokemon* new_pokemon){
+	return string_from_format("Mensaje - New Pokemon:\nNombre: %s\nTamanio del nombre: %d\nPosicion x: %d\nPosicion y: %d\nCantidad: %d\n------------",new_pokemon->nombre,new_pokemon->tamanio_nombre,new_pokemon->posicion.posicionX,new_pokemon->posicion.posicionY,new_pokemon->cantidad);
 }
 
 void new_pokemon_destroy(t_new_pokemon* new_pokemon){

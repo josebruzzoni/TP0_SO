@@ -1,4 +1,5 @@
 #include "catch_pokemon.h"
+#include <commons/string.h>
 
 t_catch_pokemon* catch_pokemon_create(char* nombre, uint32_t posX, uint32_t posY){
 	t_catch_pokemon* catch_pokemon = malloc( sizeof(t_catch_pokemon) );
@@ -57,6 +58,10 @@ void catch_pokemon_mostrar(t_catch_pokemon* catch_pokemon){
 	printf("Posicion x: %d\n",catch_pokemon->posicion.posicionX);
 	printf("Posicion y: %d\n",catch_pokemon->posicion.posicionY);
 	puts("------------");
+}
+
+char* catch_pokemon_to_string(t_catch_pokemon*catch_pokemon){
+	return string_from_format("Mensaje - Catch Pokemon:\nNombre: %s\nTamanio del nombre: %d\nPosicion x: %d\nPosicion y: %d\n------------",catch_pokemon->nombre,catch_pokemon->tamanio_nombre,catch_pokemon->posicion.posicionX,catch_pokemon->posicion.posicionY);
 }
 
 void catch_pokemon_destroy(t_catch_pokemon* catch_pokemon){

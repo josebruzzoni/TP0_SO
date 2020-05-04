@@ -1,4 +1,5 @@
 #include "localized_pokemon.h"
+#include <commons/string.h>
 
 t_localized_pokemon* localized_pokemon_create(char* nombre,uint32_t cantidadPosiciones, t_posicion* posiciones){
 	t_localized_pokemon* localized_pokemon = malloc( sizeof(t_localized_pokemon) );
@@ -77,6 +78,16 @@ void localized_pokemon_mostrar(t_localized_pokemon* localized_pokemon){
 		printf("Posicion numero %d: x = %d , y = %d \n",i+1,localized_pokemon->posiciones[i].posicionX,localized_pokemon->posiciones[i].posicionY);
 	}
 	puts("------------");
+}
+
+char* localized_pokemon_to_string(t_localized_pokemon* localized_pokemon){
+	char* mensaje = string_from_format("Mensaje - Localized Pokemon:\nNombre: %s\nTamanio de nombre: %d\nCantidad de posiciones: %d\nPosiciones: \n",localized_pokemon->nombre,localized_pokemon->tamanio_nombre,localized_pokemon->cantidadPos);
+	for(int i=0; i<localized_pokemon->cantidadPos; i++){
+			char* posicion = string_from_format("Posicion numero %d: x = %d , y = %d \n",i+1,localized_pokemon->posiciones[i].posicionX,localized_pokemon->posiciones[i].posicionY);
+			string_append(&mensaje,posicion);
+	}
+	string_append(&mensaje,"------------");
+	return mensaje;
 }
 
 void localized_pokemon_destroy(t_localized_pokemon* localized_pokemon){

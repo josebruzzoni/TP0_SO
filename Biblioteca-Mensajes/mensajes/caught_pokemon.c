@@ -1,4 +1,5 @@
 #include "caught_pokemon.h"
+#include <commons/string.h>
 
 t_caught_pokemon* caught_pokemon_create(uint32_t fueAtrapado){
 	t_caught_pokemon* caught_pokemon = malloc( sizeof(t_caught_pokemon) );
@@ -38,6 +39,10 @@ void caught_pokemon_mostrar(t_caught_pokemon* caught_pokemon){
 	printf("Mensaje - Caught Pokemon:\n");
 	printf("Fue atrapado: %d\n",caught_pokemon->atrapado);
 	puts("------------");
+}
+
+char* caught_pokemon_to_string(t_caught_pokemon* caught_pokemon){
+	return string_from_format("Mensaje - Caught Pokemon:\nFue atrapado: %d\n------------",caught_pokemon->atrapado);
 }
 
 void caught_pokemon_destroy(t_caught_pokemon* caught_pokemon){
